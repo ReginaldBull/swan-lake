@@ -1,4 +1,4 @@
-# swan-lake
+# Makrtguru API
 
 MarktguruApi is a C# project that provides an API for managing products.
 It includes features such as product creation, validation, and logging.
