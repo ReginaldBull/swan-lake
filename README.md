@@ -106,7 +106,7 @@ There are several endpoints available for managing products:
 
 ### Health endpoint
 
-Additionally, there is a endpoint for health checks:
+Additionally, there is an endpoint for health checks:
 
 * GET /health: Check the health of the API.
 
