@@ -1,6 +1,6 @@
 namespace MarktguruApi.Models
 {
-    internal interface IBaseObject
+    public interface IBaseObject
     {
         Guid Id { get; }
         DateTime CreatedAt { get; set; }
