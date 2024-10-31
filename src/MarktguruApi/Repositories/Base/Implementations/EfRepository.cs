@@ -1,6 +1,5 @@
 namespace MarktguruApi.Repositories.Base.Implementations
 {
-    using System.Linq.Expressions;
     using AutoMapper;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
@@ -37,6 +36,9 @@ namespace MarktguruApi.Repositories.Base.Implementations
                 return CreateResult<TModel>.CreateFailure(e.Message);
             }
         }
+        
+        public Task<List<TModel>> GetAllAsync(CancellationToken cancellationToken = default) => 
+            Context.Set<TModel>().AsNoTracking().ToListAsync(cancellationToken);
         
         protected abstract Task<bool> HasExisting(TCreateDto createDto, CancellationToken cancellationToken = default);
 

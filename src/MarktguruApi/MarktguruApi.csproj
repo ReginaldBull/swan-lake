@@ -31,10 +31,8 @@
 
     <ItemGroup>
       <Folder Include="Controllers\Authentication\" />
-      <Folder Include="MediatR\Queries\" />
       <Folder Include="Models\Authentication\" />
       <Folder Include="obj\Debug\net8.0\" />
-      <Folder Include="Utils\" />
     </ItemGroup>
 
 </Project>
