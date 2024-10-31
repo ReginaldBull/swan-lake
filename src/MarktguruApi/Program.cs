@@ -1,9 +1,14 @@
+using FluentValidation;
 using MarktguruApi;
+using MarktguruApi.Behaviors;
 using MarktguruApi.Extensions;
 using MarktguruApi.Repositories.Base.Interfaces;
 using MarktguruApi.Repositories.Product;
+using MarktguruApi.Utils;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
-var builder = WebApplication.CreateBuilder(args);
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 ConfigurationManager configuration = builder.Configuration;
 
@@ -22,12 +27,15 @@ builder.Services.AddJwtAuthentication(configuration)
     .Mapper()
     .AddResponseCaching()
     .AddProblemDetails()
-    .AddVersioningApiExplorer()
+    .AddExceptionHandler<GlobalExceptionHandler>()
+    .AddValidatorsFromAssembly(typeof(Program).Assembly)
+    .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>))
     .AddHealthChecks();
 
 builder.Services.AddMediatR(p =>
 {
     p.RegisterServicesFromAssemblyContaining<Program>();
+    p.AddOpenBehavior(typeof(RequestResponseLoggingBehavior<,>));
 });
 
 builder.Services.AddDbContextPool<ApplicationDbContext>(o =>
@@ -36,9 +44,12 @@ builder.Services.AddDbContextPool<ApplicationDbContext>(o =>
 });
 
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
-builder.Services.AddEndpointsApiExplorer();
 
-var app = builder.Build();
+builder.Services.AddVersioningApiExplorer();
+
+WebApplication app = builder.Build();
+
+app.UseExceptionHandler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
