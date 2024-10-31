@@ -1,4 +1,4 @@
-namespace ProductApi.Controllers.Auth
+namespace MarktguruApi.Controllers.Authentication
 {
     using System;
     using System.Collections.Generic;
@@ -8,8 +8,8 @@ namespace ProductApi.Controllers.Auth
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.IdentityModel.Tokens;
-    using Models.Auth;
-    
+    using Models.Authentication;
+
     public class AuthorizationController : ControllerBase
     {
         private const string TokenSecret = "my_secret_key_12345_my_secret_key_12345_my_secret_key_12345";

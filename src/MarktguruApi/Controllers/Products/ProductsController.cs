@@ -1,9 +1,9 @@
-namespace MarktguruApi.Controllers
+namespace MarktguruApi.Controllers.Products
 {
     using Asp.Versioning;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    
+
     [ApiController]
     [Route("api/[controller]")]
     [ApiVersion("1.0")]

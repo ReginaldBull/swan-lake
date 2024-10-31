@@ -1,4 +1,4 @@
-namespace ProductApi.Models.Auth
+namespace MarktguruApi.Models.Authentication
 {
     using System.ComponentModel;
     public class TokenGenerationDto

@@ -1,10 +1,10 @@
-namespace ProductApiTests.ControllerTests.Auth
+namespace MarktguruApiTests.ControllerTests.Authentication
 {
     using FluentAssertions;
+    using MarktguruApi.Controllers.Authentication;
+    using MarktguruApi.Models.Authentication;
     using Microsoft.AspNetCore.Mvc;
-    using ProductApi.Controllers.Auth;
-    using ProductApi.Models.Auth;
-    
+
     [TestFixture]
     public class AuthorizationControllerTests
     {
