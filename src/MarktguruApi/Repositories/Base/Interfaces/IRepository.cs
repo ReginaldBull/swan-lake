@@ -9,5 +9,6 @@ namespace MarktguruApi.Repositories.Base.Interfaces
         Task<List<TModel>> GetAllAsync(CancellationToken cancellationToken = default);
         Task<TModel?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
         Task<UpdateResult<TModel>> UpdateAsync(Guid id, TUpdateDto createDto, CancellationToken cancellationToken = default);
+        Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
     }
 }
