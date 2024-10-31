@@ -21,4 +21,5 @@ namespace MarktguruApi.Models.Product.Dtos
          */
         public int Version { get; set; }
     }
+
 }

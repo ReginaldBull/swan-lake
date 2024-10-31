@@ -11,6 +11,7 @@ namespace MarktguruApi.Extensions
             {
                 cfg.CreateMap<CreateProductDto, Product>();
                 cfg.CreateMap<Product, ProductResponseDto>();
+                cfg.CreateMap<Product, ProductReducedDto>();
             });
             return services;
         } 
