@@ -16,8 +16,8 @@ namespace MarktguruApi.Extensions
                     x.TokenValidationParameters = new TokenValidationParameters
                     {
                         IssuerSigningKey = new SymmetricSecurityKey((Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]!))),
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true
                     };
