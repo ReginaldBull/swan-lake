@@ -10,11 +10,26 @@ namespace MarktguruApi.Controllers.Authentication
     using Microsoft.IdentityModel.Tokens;
     using Models.Authentication;
 
+    /// <summary>
+    /// Controller responsible for handling authorization and token generation.
+    /// </summary>
     public class AuthorizationController : ControllerBase
     {
+        /// <summary>
+        /// The secret key used for token generation.
+        /// </summary>
         private const string TokenSecret = "my_secret_key_12345_my_secret_key_12345_my_secret_key_12345";
+
+        /// <summary>
+        /// The lifetime of the generated token.
+        /// </summary>
         private static readonly TimeSpan TokenLifetime = TimeSpan.FromHours(1);
-        
+
+        /// <summary>
+        /// Generates a JWT token based on the provided user credentials.
+        /// </summary>
+        /// <param name="dto">The DTO containing the user credentials.</param>
+        /// <returns>An IActionResult containing the generated JWT token or an error response.</returns>
         [HttpPost("token")]
         public async Task<IActionResult> GenerateToken([FromBody] TokenGenerationDto dto)
         {
@@ -22,7 +37,7 @@ namespace MarktguruApi.Controllers.Authentication
             {
                 return BadRequest();
             }
-            
+
             if(dto.UserName != "Test" || dto.Password != "test")
             {
                 return Unauthorized();

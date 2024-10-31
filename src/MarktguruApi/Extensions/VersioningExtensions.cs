@@ -3,9 +3,17 @@ namespace MarktguruApi.Extensions
     using Asp.Versioning;
     using Microsoft.Extensions.DependencyInjection;
 
+    /// <summary>
+    /// Provides extension methods for adding API versioning and API explorer services.
+    /// </summary>
     internal static class VersioningExtensions
     {
-        public static IServiceCollection AddApiExplorer(this IServiceCollection services)
+        /// <summary>
+        /// Adds API versioning and API explorer services to the specified IServiceCollection.
+        /// </summary>
+        /// <param name="services">The IServiceCollection to add the services to.</param>
+        /// <returns>The IServiceCollection with the API versioning and API explorer services added.</returns>
+        public static IServiceCollection AddVersioningApiExplorer(this IServiceCollection services)
         {
             IApiVersioningBuilder apiVersioningBuilder = services.AddApiVersioning(o =>
             {

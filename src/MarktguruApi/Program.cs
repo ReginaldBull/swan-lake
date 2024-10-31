@@ -22,6 +22,7 @@ builder.Services.AddJwtAuthentication(configuration)
     .Mapper()
     .AddResponseCaching()
     .AddProblemDetails()
+    .AddVersioningApiExplorer()
     .AddHealthChecks();
 
 builder.Services.AddMediatR(p =>
