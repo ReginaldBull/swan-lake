@@ -1,5 +1,7 @@
 namespace MarktguruApi.Extensions
 {
+    using System.Collections.Generic;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.OpenApi.Models;
 
     internal static class SwaggerExtensions

@@ -1,6 +1,7 @@
 namespace MarktguruApi.Extensions
 {
     using Asp.Versioning;
+    using Microsoft.Extensions.DependencyInjection;
 
     internal static class VersioningExtensions
     {
