@@ -4,8 +4,16 @@ namespace MarktguruApi.Extensions
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.OpenApi.Models;
 
+    /// <summary>
+    /// Provides extension methods for adding Swagger with authentication to the service collection.
+    /// </summary>
     internal static class SwaggerExtensions
     {
+        /// <summary>
+        /// Adds Swagger with JWT authentication to the specified IServiceCollection.
+        /// </summary>
+        /// <param name="service">The IServiceCollection to add the services to.</param>
+        /// <returns>The IServiceCollection with the Swagger services added.</returns>
         public static IServiceCollection AddSwaggerWithAuthentication(this IServiceCollection service)
         {
             service.AddSwaggerGen(opt =>

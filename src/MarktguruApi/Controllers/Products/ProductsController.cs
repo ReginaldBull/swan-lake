@@ -112,5 +112,21 @@ namespace MarktguruApi.Controllers.Products
             ProductResponseDto response = await mediator.Send(command, cancellationToken);
             return response == null ? BadRequest() : Ok(response);
         }
+
+        /// <summary>
+        /// Deletes a product by its unique identifier.
+        /// </summary>
+        /// <param name="id">The unique identifier of the product to delete.</param>
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        /// <returns>No content if the deletion is successful; otherwise, a 404 Not Found response.</returns>
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult> DeleteProduct(
+            Guid id,
+            CancellationToken cancellationToken = default)
+        {
+            var command = new DeleteProductCommand(id);
+            bool success = await mediator.Send(command, cancellationToken);
+            return success ? NoContent() : NotFound();
+        }
     }
 }
