@@ -31,7 +31,7 @@ namespace MarktguruApiTests.MediatRTests.Handler.Product
             var repository = new Mock<IProductRepository>();
             IMapper? mapper = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Product, ProductResponseDto>();
+                cfg.CreateMap<Product, ProductReducedDto>();
             }).CreateMapper();
             var handler = new GetAllProductsQueryHandler(repository.Object, mapper);
 
