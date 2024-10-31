@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarktguruApi", "src\MarktguruApi\MarktguruApi.csproj", "{CE0FE3FB-31C7-48B8-95E0-95CB7C604BB2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0311710B-1B5E-433E-84C0-08927FC71E5C}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarktguruApiTests", "tests\MarktguruApiTests\MarktguruApiTests.csproj", "{F3B74981-93DD-4B8C-8D30-6BA3B9723456}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE0FE3FB-31C7-48B8-95E0-95CB7C604BB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE0FE3FB-31C7-48B8-95E0-95CB7C604BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE0FE3FB-31C7-48B8-95E0-95CB7C604BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE0FE3FB-31C7-48B8-95E0-95CB7C604BB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3B74981-93DD-4B8C-8D30-6BA3B9723456}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3B74981-93DD-4B8C-8D30-6BA3B9723456}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3B74981-93DD-4B8C-8D30-6BA3B9723456}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3B74981-93DD-4B8C-8D30-6BA3B9723456}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

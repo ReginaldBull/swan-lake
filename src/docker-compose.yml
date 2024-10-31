@@ -1,0 +1,6 @@
+﻿services:
+  marktguruapi:
+    image: marktguruapi
+    build:
+      context: .
+      dockerfile: MarktguruApi/Dockerfile
