@@ -9,6 +9,10 @@ namespace MarktguruApi.Controllers.Products
     using Models.Product.Dtos;
     using Utils;
 
+    /// <summary>
+    /// Controller for managing products.
+    /// </summary>
+    /// <param name="mediator">The mediator instance for handling commands and queries.</param>
     [ApiController]
     [Route("api/[controller]")]
     [ApiVersion("1.0")]
@@ -60,6 +64,7 @@ namespace MarktguruApi.Controllers.Products
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [AllowAnonymous]
+        [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any, NoStore = false)]
         public async Task<ActionResult<PaginatedList<ProductReducedDto>>> GetPaginatedProducts(
             [FromQuery] int page = 1,
             [FromQuery] int pageSize = 10,
@@ -68,6 +73,26 @@ namespace MarktguruApi.Controllers.Products
             var query = new GetPaginatedProductsQuery(page, pageSize);
             PaginatedList<ProductReducedDto> response = await mediator.Send(query, cancellationToken);
             return Ok(response);
+        }
+
+        /// <summary>
+        /// Retrieves a product by its unique identifier.
+        /// </summary>
+        /// <param name="id">The unique identifier of the product.</param>
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        /// <returns>The product response if found; otherwise, a 404 Not Found response.</returns>
+        [HttpGet("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [AllowAnonymous]
+        [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any, NoStore = false)]
+        public async Task<ActionResult<ProductResponseDto>> GetProductById(
+            Guid id,
+            CancellationToken cancellationToken = default)
+        {
+            var query = new GetProductByIdQuery(id);
+            ProductResponseDto product = await mediator.Send(query, cancellationToken);
+            return product == null ? NotFound() : Ok(product);
         }
     }
 }
