@@ -1,9 +1,8 @@
-using FluentValidation;
+using MarktguruApi;
 using MarktguruApi.Extensions;
-using MediatR;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using MarktguruApi.Repositories.Base.Interfaces;
+using MarktguruApi.Repositories.Product;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 ConfigurationManager configuration = builder.Configuration;
@@ -20,10 +19,22 @@ builder.Services.AddJwtAuthentication(configuration)
     .AddAuthorization()
     .AddEndpointsApiExplorer()
     .AddSwaggerWithAuthentication()
+    .Mapper()
     .AddResponseCaching()
     .AddProblemDetails()
     .AddHealthChecks();
 
+builder.Services.AddMediatR(p =>
+{
+    p.RegisterServicesFromAssemblyContaining<Program>();
+});
+
+builder.Services.AddDbContextPool<ApplicationDbContext>(o =>
+{
+    o.UseInMemoryDatabase("ProductDb");
+});
+
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();

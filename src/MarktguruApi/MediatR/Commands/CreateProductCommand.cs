@@ -4,5 +4,4 @@ namespace MarktguruApi.MediatR.Commands
     using Models.Product.Dtos;
 
     public record CreateProductCommand(CreateProductDto CreateProductDto, Guid CorrelationId) : IRequest<ProductResponseDto>;
-
 }
