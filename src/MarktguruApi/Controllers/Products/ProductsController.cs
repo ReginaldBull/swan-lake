@@ -15,7 +15,12 @@ namespace MarktguruApi.Controllers.Products
     [Authorize]
     public class ProductsController(IMediator mediator) : ControllerBase
     {
-        
+        /// <summary>
+        /// Creates a new product.
+        /// </summary>
+        /// <param name="createProductDto">The data transfer object containing the product details.</param>
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        /// <returns>The created product response.</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<ProductResponseDto>> CreateProduct(
@@ -26,7 +31,12 @@ namespace MarktguruApi.Controllers.Products
             ProductResponseDto response = await mediator.Send(command, cancellationToken);
             return response == null ? BadRequest() : CreatedAtAction(nameof(CreateProduct), new { id = response.Id }, response);
         }
-        
+
+        /// <summary>
+        /// Retrieves all products.
+        /// </summary>
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        /// <returns>A list of all products.</returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -38,7 +48,14 @@ namespace MarktguruApi.Controllers.Products
             List<ProductReducedDto> response = await mediator.Send(query, cancellationToken);
             return Ok(response);
         }
-        
+
+        /// <summary>
+        /// Retrieves a paginated list of products.
+        /// </summary>
+        /// <param name="page">The page number to retrieve. Defaults to 1.</param>
+        /// <param name="pageSize">The number of items per page. Defaults to 10.</param>
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        /// <returns>A paginated list of products.</returns>
         [HttpGet("paginated")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
