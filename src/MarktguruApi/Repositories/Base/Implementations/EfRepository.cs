@@ -7,7 +7,7 @@ namespace MarktguruApi.Repositories.Base.Implementations
     using Models;
     using Models.Results;
 
-    public abstract class EfRepository<TModel, TCreateDto>(DbContext context, IMapper mapper) : IRepository<TModel, TCreateDto>
+    public abstract class EfRepository<TModel, TCreateDto, TUpdateDto>(DbContext context, IMapper mapper) : IRepository<TModel, TCreateDto, TUpdateDto>
         where TModel : class, IBaseObject
     {
         protected readonly DbContext Context = context;
@@ -44,5 +44,39 @@ namespace MarktguruApi.Repositories.Base.Implementations
         
         public Task<TModel?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default) =>
             Context.Set<TModel>().AsNoTracking().SingleOrDefaultAsync(p => p.Id == id, cancellationToken);
+        
+        public async Task<UpdateResult<TModel>> UpdateAsync(Guid id, TUpdateDto createDto, CancellationToken cancellationToken = default)
+        {
+            TModel? entry = await GetByIdWithTrackingAsync(id, cancellationToken).ConfigureAwait(false);
+            if (entry == null)
+            {
+                return UpdateResult<TModel>.CreateFailure("Entity not found.");
+            }
+
+            try
+            {
+                if (HasConflict(entry, createDto))
+                {
+                    return UpdateResult<TModel>.CreateFailure("Entity has been modified by another user.");
+                }
+                
+                Context.Set<TModel>().Update(UpdateModel(entry, createDto));
+                int affectedRows = await Context.SaveChangesAsync(cancellationToken);
+                return affectedRows == 0
+                    ? UpdateResult<TModel>.CreateFailure("Failed to save entity.")
+                    : UpdateResult<TModel>.CreateSuccess(entry);
+            }
+            catch (Exception e)
+            {
+                return UpdateResult<TModel>.CreateFailure(e.Message);
+            }
+        }
+        
+        private Task<TModel?> GetByIdWithTrackingAsync(Guid id, CancellationToken cancellationToken = default) =>
+            Context.Set<TModel>().SingleOrDefaultAsync(p => p.Id == id, cancellationToken);
+
+        internal abstract TModel UpdateModel(TModel entry, TUpdateDto updateDto);
+
+        protected abstract bool HasConflict(TModel entry, TUpdateDto createDto);
     }
 }

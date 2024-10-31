@@ -5,7 +5,7 @@ namespace MarktguruApi.Repositories.Base.Interfaces
     using Models.Product.Dtos;
     using Utils;
 
-    public interface IProductRepository : IRepository<Product, CreateProductDto>
+    public interface IProductRepository : IRepository<Product, CreateProductDto, UpdateProductDto>
     {
         Task<PaginatedList<ProductReducedDto>> GetPaginatedAsync(IMapper mapper, int pageNumber, int requestPageSize, CancellationToken cancellationToken);
     }

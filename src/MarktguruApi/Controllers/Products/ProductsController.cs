@@ -94,5 +94,23 @@ namespace MarktguruApi.Controllers.Products
             ProductResponseDto product = await mediator.Send(query, cancellationToken);
             return product == null ? NotFound() : Ok(product);
         }
+
+        /// <summary>
+        /// Updates an existing product.
+        /// </summary>
+        /// <param name="id">The unique identifier of the product to update.</param>
+        /// <param name="updateProductDto">The data transfer object containing the updated product details.</param>
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        /// <returns>The updated product response.</returns>
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<ProductResponseDto>> UpdateProduct(
+            Guid id,
+            [FromBody] UpdateProductDto updateProductDto,
+            CancellationToken cancellationToken = default)
+        {
+            var command = new UpdateProductCommand(id, updateProductDto);
+            ProductResponseDto response = await mediator.Send(command, cancellationToken);
+            return response == null ? BadRequest() : Ok(response);
+        }
     }
 }
