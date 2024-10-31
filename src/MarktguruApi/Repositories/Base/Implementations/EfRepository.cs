@@ -41,6 +41,8 @@ namespace MarktguruApi.Repositories.Base.Implementations
             Context.Set<TModel>().AsNoTracking().ToListAsync(cancellationToken);
         
         protected abstract Task<bool> HasExisting(TCreateDto createDto, CancellationToken cancellationToken = default);
-
+        
+        public Task<TModel?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default) =>
+            Context.Set<TModel>().AsNoTracking().SingleOrDefaultAsync(p => p.Id == id, cancellationToken);
     }
 }

@@ -32,7 +32,11 @@
     <ItemGroup>
       <Folder Include="Controllers\Authentication\" />
       <Folder Include="Models\Authentication\" />
-      <Folder Include="obj\Debug\net8.0\" />
     </ItemGroup>
 
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>MarktguruApiTests</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
 </Project>
