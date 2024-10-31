@@ -110,4 +110,6 @@ Additionally, there is a endpoint for health checks:
 
 * GET /health: Check the health of the API.
 
+## Postman collection
 
+You can find a Postman collection within the docs folder.
