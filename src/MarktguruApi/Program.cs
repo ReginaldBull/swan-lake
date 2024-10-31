@@ -47,6 +47,8 @@ if (app.Environment.IsDevelopment())
 }
 app.MapHealthChecks("/health");
 
+app.UseResponseCaching();
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
