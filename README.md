@@ -1,6 +1,6 @@
-# Makrtguru API
+# Marktguru-API
 
-MarktguruApi is a C# project that provides an API for managing products.
+Marktguru-Api is a C# project that provides an API for managing products.
 It includes features such as product creation, validation, and logging.
 
 This project uses a InMemoryDatabase – this is of course not suitable for production purposes.
@@ -25,7 +25,12 @@ The API is built using ASP.NET Core and MediatR.
   * [Logging](#Logging)
   * [Monitoring](#Monitoring)
   * [Security](#Security)
+    * [Delete endpoint](#Delete-endpoint)
+    * [Audit](#Audit)
+  * [Transactions](#Transactions)
   * [Testing](#Testing)
+    * [BDD](#BDD)
+    * [Code review](#Code-review)
 
 ## Installation
 
@@ -148,13 +153,13 @@ Additionally, in a production environment, the instances of the service should b
 
 #### Pagination
 
-The Assignment asked for a endpoint that returns all the products.
-This will cause problems as soon the amount of products grows.
+The Assignment asked for an endpoint that returns all the products.
+This will cause problems as soon the number of products grows.
 To counter this, the project includes a paginated endpoint.
 
 #### Read vs Write
 
-The project is optimized for read operations. The write operations are not optimized. I assumed that the read
+The project is optimized for read operations. The write operations aren't optimized. I assumed that the read
 operations are more frequent than the write operations.
 To optimize write operations, the project should subscribe to a message queue like RabbitMQ or Kafka.
 This would allow the project to handle write operations asynchronously.
@@ -179,8 +184,36 @@ This is not secure and should be replaced with injecting the secret from the env
 
 The password is currently stored in plain text in the source code. In a production environment, the password should be hashed and salted.
 
+#### Delete endpoint
+
+Instead of hard delete, the project may use a soft delete.
+This would allow the project to keep the data for auditing purposes.
+Also, maybe not every user should be able to delete a product.
+This should be handled by roles and permissions.
+
+### Audit
+
+For a better understanding of the transactions in the database, an audit log should be implemented.
+
+### Transactions
+
+For the simplicity of the project, transactions aren't used.
+But it is recommended to use transactions to ensure data consistency.
+
 ### Testing
 
-The project includes unit tests for the API.
+The project includes unit tests for the API. 
 To get a better understanding of the performance of the API stress-tests, load-tests should be performed and monitored.
 Tools for this are, for example, k6.
+
+#### BDD
+
+The project does not include Behavior-Driven Development (BDD) tests.
+I would recommend using BDD test to ensure that the project meets the requirements of the stakeholders.
+
+#### Code review
+
+Code reviews are an important part of the development process.
+Maybe also considering static code analysis tools, for example,
+something like Sonarqube or Qodana to ensure the code quality and identify risks in the code base.
+
