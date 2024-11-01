@@ -104,7 +104,7 @@ docker run -p 5000:8080 marktguruapi
 
 ### Authentication endpoint
 
-Authentication is required to access parts of the api.
+Authentication is required to access parts of the API.
 
 To authenticate, you can use the following credentials:
 
@@ -154,7 +154,7 @@ Additionally, in a production environment, the instances of the service should b
 #### Pagination
 
 The Assignment asked for an endpoint that returns all the products.
-This will cause problems as soon the number of products grows.
+This will cause problems as soon as the number of products grows.
 To counter this, the project includes a paginated endpoint.
 
 #### Read vs Write
@@ -163,7 +163,7 @@ The project is optimized for read operations. The write operations aren't optimi
 operations are more frequent than the write operations.
 To optimize write operations, the project should subscribe to a message queue like RabbitMQ or Kafka.
 This would allow the project to handle write operations asynchronously.
-If the use or RabbitMQ or Kafka is not suitable, the project should use rate limiting to keep the system stable.
+If the use of RabbitMQ or Kafka is not suitable, the project should use rate limiting to keep the system stable.
 
 ### Logging
 
@@ -214,6 +214,6 @@ I would recommend using BDD test to ensure that the project meets the requiremen
 #### Code review
 
 Code reviews are an important part of the development process.
-Maybe also considering static code analysis tools, for example,
-something like Sonarqube or Qodana to ensure the code quality and identify risks in the code base.
+Perhaps also consider static code analysis tools, for example, something like Sonarqube or Qodana, 
+for code quality assurance and to identify risks in the code base.
 
