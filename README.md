@@ -9,6 +9,9 @@ Authentication is done using a hardcoded username and password and is included a
 The access layer uses Entity Framework Core. 
 The API is built using ASP.NET Core and MediatR.
 
+Swagger documentation can be found under /swagger/index.html.
+First login under the /token endpoint, copy the token from the response and authorize the swagger documentation with the token.
+
 ## Table of Contents
 
 * [Installation](#Installation)
