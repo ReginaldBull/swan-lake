@@ -16,7 +16,7 @@ namespace MarktguruApi.Models.Product
         /// <summary>
         /// Gets or sets the name of the product.
         /// </summary>
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the price of the product.
