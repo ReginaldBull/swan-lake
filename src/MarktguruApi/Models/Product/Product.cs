@@ -1,5 +1,6 @@
 namespace MarktguruApi.Models.Product
 {
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     /// <summary>
@@ -16,6 +17,8 @@ namespace MarktguruApi.Models.Product
         /// <summary>
         /// Gets or sets the name of the product.
         /// </summary>
+        [StringLength(200, MinimumLength = 1)]
+        [RegularExpression(@"^[^<>]*$")] // Prevent HTML injection
         public required string Name { get; set; }
 
         /// <summary>
